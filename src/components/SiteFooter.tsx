@@ -3,7 +3,7 @@ import { MapPin } from "lucide-react";
 import { navLinks, siteConfig } from "@/config/site";
 import { services, servicePath } from "@/config/services";
 import { PhoneNumber } from "@/components/ContactButtons";
-import { Wordmark } from "@/components/Wordmark";
+import { Logo } from "@/components/Logo";
 import { PulseLine, WhatsAppIcon } from "@/components/icons";
 import { telHref, whatsappHref } from "@/lib/contact";
 import { hasAddress } from "@/lib/seo";
@@ -36,7 +36,7 @@ export function SiteFooter() {
       <div className="bg-navy text-cream">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:grid-cols-2 sm:px-6 lg:grid-cols-[1.4fr_1fr_1.2fr_1.2fr]">
           <div>
-            <Wordmark light />
+            <Logo surface />
             <p className="mt-4 text-cream/85">{siteConfig.tagline}</p>
             <p className="mt-2 inline-flex items-center gap-1.5 text-cream/85">
               <MapPin aria-hidden className="size-4 text-gold" />
