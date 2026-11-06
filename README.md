@@ -24,6 +24,8 @@ npm start        # تشغيل نسخة الإنتاج بعد البناء
 | أسئلة الصفحة الرئيسية | `src/config/faqs.ts` |
 | الألوان والخطوط | `src/app/globals.css` و`src/app/layout.tsx` |
 | صورة القسم الافتتاحي | `src/assets/home-visit.jpg` |
+| نصوص قسم النموذج 3D في الرئيسية | `src/components/XrayModel3D.tsx` |
+| أشكال وألوان النموذج 3D | `src/components/xray-scene.ts` |
 | صورة المشاركة على السوشيال | `public/og.png` (مقاس 1200×630) |
 
 أي حقل فاضي في `site.ts` يختفي من الواجهة ومن JSON-LD. عند تعبئته يظهر تلقائيًا.

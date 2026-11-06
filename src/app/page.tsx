@@ -7,6 +7,7 @@ import { ContactCta } from "@/components/ContactCta";
 import { FaqList } from "@/components/FaqList";
 import { JsonLd } from "@/components/JsonLd";
 import { ServiceCard } from "@/components/ServiceCard";
+import { XrayModel3D } from "@/components/XrayModel3D";
 import { PulseLine } from "@/components/icons";
 import { homeFaqs } from "@/config/faqs";
 import { services } from "@/config/services";
@@ -78,6 +79,8 @@ export default function HomePage() {
           </figure>
         </div>
       </section>
+
+      <XrayModel3D />
 
       <section aria-labelledby="about-center" className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
         <div className="grid gap-4 border-y border-gold/50 py-8 md:grid-cols-[auto_1fr] md:gap-10">
