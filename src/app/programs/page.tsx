@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { CircleHelp } from "lucide-react";
 import { buttonClass } from "@/components/ContactButtons";
@@ -5,6 +6,7 @@ import { ContactCta } from "@/components/ContactCta";
 import { PageHeader } from "@/components/PageHeader";
 import { ServiceIcon } from "@/components/icons";
 import { carePrograms } from "@/config/care";
+import { programImages } from "@/config/program-images";
 import { getService, servicePath } from "@/config/services";
 import { pageMetadata } from "@/lib/seo";
 
@@ -24,9 +26,26 @@ export default function ProgramsPage() {
         crumbs={[{ label: "برامج الرعاية", href: "/programs" }]}
       />
 
-      <div className="mx-auto grid max-w-6xl gap-5 px-4 py-12 sm:px-6 lg:grid-cols-2">
-        {carePrograms.map((program) => (
-          <article key={program.key} id={program.key} className="scroll-mt-6 flex flex-col rounded-3xl border border-navy/10 bg-cream p-6 sm:p-7">
+      <div className="mx-auto grid max-w-6xl gap-5 px-4 pt-12 pb-4 sm:px-6 lg:grid-cols-2">
+        {carePrograms.map((program, index) => {
+          const image = programImages[program.key];
+          return (
+          <article
+            key={program.key}
+            id={program.key}
+            className="scroll-mt-6 flex flex-col overflow-hidden rounded-3xl border border-navy/10 bg-cream"
+          >
+            {image ? (
+              <Image
+                src={image.src}
+                alt={image.alt}
+                sizes="(min-width: 1152px) 544px, (min-width: 1024px) 47vw, 100vw"
+                placeholder="blur"
+                loading={index < 2 ? "eager" : "lazy"}
+                className="aspect-[16/9] w-full object-cover"
+              />
+            ) : null}
+            <div className="flex flex-1 flex-col p-6 sm:p-7">
             <h2 className="text-2xl font-extrabold">{program.title}</h2>
             <p className="mt-2 text-navy/85">{program.forWhom}</p>
 
@@ -62,9 +81,14 @@ export default function ProgramsPage() {
             <Link href={`/request?service=${program.slugs[0]}`} className={buttonClass("navy", "self-start")}>
               اطلب الخدمة
             </Link>
+            </div>
           </article>
-        ))}
+          );
+        })}
       </div>
+      <p className="mx-auto max-w-6xl px-4 text-sm text-navy/75 sm:px-6">
+        الصور توضيحية، والأشخاص فيها مش من فريق المركز أو مرضاه.
+      </p>
 
       <ContactCta title="حالتكم مش موجودة هنا؟" text="اتصل بالمركز واشرح الوضع، أو ارجع للطبيب المعالج عشان يحدد المطلوب." />
     </>
