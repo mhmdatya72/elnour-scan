@@ -40,7 +40,7 @@ export default function AreasPage() {
           <ul className="mt-4 space-y-2">
             {[
               "اسم المنطقة وأقرب علامة مميزة.",
-              "الفحص المطلوب زي ما هو مكتوب في طلب الطبيب.",
+              "الخدمة المطلوبة، أو اسم الفحص زي ما هو في طلب الطبيب.",
               "الوقت المناسب للأسرة.",
             ].map((item) => (
               <li key={item} className="flex gap-3 text-navy/90">

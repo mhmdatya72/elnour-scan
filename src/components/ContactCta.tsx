@@ -4,8 +4,8 @@ import { siteConfig } from "@/config/site";
 import { telHref } from "@/lib/contact";
 
 export function ContactCta({
-  title = "جاهز تسأل عن الفحص المطلوب؟",
-  text = "كلّم المركز أو ابعت رسالة واتساب، واذكر الفحص ومنطقتك داخل الإسكندرية. الموعد بيتأكد لما تتفقوا عليه.",
+  title = "جاهز تسأل عن الخدمة المطلوبة؟",
+  text = "كلّم المركز أو ابعت رسالة واتساب، واذكر الخدمة ومنطقتك داخل الإسكندرية. الموعد بيتأكد لما تتفقوا عليه.",
   whatsappMessage,
 }: {
   title?: string;

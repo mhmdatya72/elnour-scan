@@ -16,7 +16,7 @@ export function CenterFacts() {
         </>
       ),
     },
-    { label: "النشاط", value: "مركز أشعة وتشخيص يقدّم خدمات منزلية" },
+    { label: "النشاط", value: "رعاية طبية منزلية متكاملة، منها الأشعة والتشخيص" },
     { label: "الشعار", value: tagline },
     { label: "نطاق الخدمة", value: `داخل ${city.ar}` },
     { label: "مناسبة لـ", value: "كبار السن وغير القادرين على الحركة" },
@@ -34,6 +34,15 @@ export function CenterFacts() {
     },
   ];
 
+  if (siteConfig.licenses.length > 0) {
+    rows.push({ label: "التراخيص", value: siteConfig.licenses.join(" · ") });
+  }
+  if (siteConfig.team.length > 0) {
+    rows.push({
+      label: "الفريق",
+      value: siteConfig.team.map((member) => `${member.name} (${member.title})`).join(" · "),
+    });
+  }
   if (areas.length > 0) rows.push({ label: "المناطق", value: areas.join("، ") });
   if (hasAddress()) {
     rows.push({

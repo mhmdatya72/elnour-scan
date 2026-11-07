@@ -12,6 +12,33 @@ export type InquiryInput = {
   message: string;
 };
 
+/** تفاصيل اختيارية من طلب الخدمة بالخطوات. قيمها محددة، فلا تحمل نصًا حرًا */
+export const DETAIL_OPTIONS = {
+  patient: ["لنفسي", "لحد من الأسرة"],
+  mobility: ["بيتحرك لوحده", "بيتحرك بمساعدة", "ملازم السرير"],
+  timing: ["في أقرب وقت", "خلال الأسبوع", "بستفسر دلوقتي"],
+} as const;
+
+export type InquiryDetails = { patient?: string; mobility?: string; timing?: string };
+
+const DETAIL_LABELS: Record<keyof InquiryDetails, string> = {
+  patient: "الطلب",
+  mobility: "حركة المريض",
+  timing: "الموعد المطلوب",
+};
+
+/** يحتفظ بالقيم المعروفة فقط */
+export function cleanDetails(raw: Record<string, unknown>): InquiryDetails {
+  const clean: InquiryDetails = {};
+  for (const key of Object.keys(DETAIL_OPTIONS) as (keyof InquiryDetails)[]) {
+    const value = raw[key];
+    if (typeof value === "string" && (DETAIL_OPTIONS[key] as readonly string[]).includes(value)) {
+      clean[key] = value;
+    }
+  }
+  return clean;
+}
+
 export type InquiryField = keyof InquiryInput;
 export type InquiryErrors = Partial<Record<InquiryField, string>>;
 
@@ -57,13 +84,17 @@ export function validateInquiry(
   return { ok: true, data: { name, phone, service: input.service, area, message } };
 }
 
-export function inquiryToWhatsappMessage(data: InquiryInput): string {
+export function inquiryToWhatsappMessage(data: InquiryInput, details: InquiryDetails = {}): string {
+  const detailLines = (Object.keys(DETAIL_LABELS) as (keyof InquiryDetails)[]).flatMap((key) =>
+    details[key] ? [`${DETAIL_LABELS[key]}: ${details[key]}`] : [],
+  );
   return [
     "السلام عليكم، عندي استفسار من الموقع:",
     `الاسم: ${data.name}`,
     `الهاتف: ${data.phone}`,
     `الخدمة: ${data.service}`,
     `المنطقة: ${data.area}`,
+    ...detailLines,
     ...(data.message ? [`الرسالة: ${data.message}`] : []),
   ].join("\n");
 }

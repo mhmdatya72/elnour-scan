@@ -6,8 +6,10 @@ import { absoluteUrl } from "@/lib/seo";
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
     "/",
+    "/request",
     "/services",
     ...services.map((service) => servicePath(service.slug)),
+    "/programs",
     "/areas",
     "/about",
     "/contact",

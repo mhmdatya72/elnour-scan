@@ -19,7 +19,7 @@ const OG_IMAGE = {
   url: "/og.png",
   width: 1200,
   height: 630,
-  alt: "النور سكان: الأشعة لحد باب بيتك في الإسكندرية",
+  alt: "النور سكان: رعاية طبية متكاملة لحد باب بيتك في الإسكندرية",
 };
 
 export function pageMetadata({

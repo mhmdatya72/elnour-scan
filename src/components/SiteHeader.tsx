@@ -1,6 +1,9 @@
-import { CallButton, WhatsAppButton } from "@/components/ContactButtons";
+import Link from "next/link";
+import { buttonClass, CallButton } from "@/components/ContactButtons";
 import { HeaderNav } from "@/components/HeaderNav";
 import { Logo } from "@/components/Logo";
+import { WhatsAppIcon } from "@/components/icons";
+import { whatsappHref } from "@/lib/contact";
 
 export function SiteHeader() {
   return (
@@ -10,8 +13,19 @@ export function SiteHeader() {
         <HeaderNav
           actions={
             <>
-              <WhatsAppButton label="واتساب" className="!min-h-11 !px-5 !py-1.5" />
-              <CallButton className="!min-h-11 !px-5 !py-1.5" />
+              <a
+                href={whatsappHref()}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="تواصل عبر واتساب (يفتح في نافذة جديدة)"
+                className="inline-flex size-11 items-center justify-center rounded-full border-2 border-navy transition-colors hover:bg-navy hover:text-cream"
+              >
+                <WhatsAppIcon className="size-5" />
+              </a>
+              <CallButton variant="outline" className="!min-h-11 !px-4 !py-1.5" />
+              <Link href="/request" className={buttonClass("navy", "!min-h-11 !px-5 !py-1.5")}>
+                اطلب خدمة
+              </Link>
             </>
           }
         />

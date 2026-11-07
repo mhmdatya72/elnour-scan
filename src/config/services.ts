@@ -4,7 +4,18 @@
  * علاجية أو أجهزة أو أسعارًا إلا بعد تأكيدها من المركز.
  */
 
+import { careServices } from "@/config/care-services";
+
 export type ServiceIconName =
+  | "doctor"
+  | "orthopedic"
+  | "nursing"
+  | "lab"
+  | "physio"
+  | "icu"
+  | "equipment"
+  | "companion"
+  | "ambulance"
   | "home"
   | "chest"
   | "bone"
@@ -34,11 +45,13 @@ export type Service = {
   sections: ServiceSection[];
   /** تنبيه خاص بالفحص يظهر بجوار تنبيه التحضير العام */
   safetyNote?: string;
+  /** بديل نص التحضير العام للفحوصات، للخدمات اللي مش فحص */
+  preparationNote?: string;
   faqs: Faq[];
   related: string[];
 };
 
-export const services: Service[] = [
+const imagingServices: Service[] = [
   {
     slug: "home-xray",
     name: "الأشعة المنزلية",
@@ -471,6 +484,8 @@ export const services: Service[] = [
     related: ["ultrasound", "echo", "ecg"],
   },
 ];
+
+export const services: Service[] = [...careServices, ...imagingServices];
 
 export function getService(slug: string): Service | undefined {
   return services.find((service) => service.slug === slug);

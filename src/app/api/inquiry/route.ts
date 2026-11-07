@@ -1,5 +1,5 @@
 import { services } from "@/config/services";
-import { UNSURE_SERVICE, validateInquiry, type InquiryInput } from "@/lib/inquiry";
+import { cleanDetails, UNSURE_SERVICE, validateInquiry, type InquiryInput } from "@/lib/inquiry";
 
 const ALLOWED_SERVICES = [...services.map((service) => service.name), UNSURE_SERVICE];
 const MAX_BODY_BYTES = 8_000;
@@ -47,7 +47,7 @@ export async function POST(request: Request) {
     const delivered = await fetch(webhook, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(result.data),
+      body: JSON.stringify({ ...result.data, ...cleanDetails(body) }),
       signal: AbortSignal.timeout(8_000),
     });
     if (!delivered.ok) {

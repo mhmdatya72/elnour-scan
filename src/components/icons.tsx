@@ -1,10 +1,18 @@
 import {
   Activity,
+  Ambulance,
   AudioLines,
+  BedSingle,
   Bone,
   ClipboardPlus,
+  Dumbbell,
+  FlaskConical,
+  HeartHandshake,
   HeartPulse,
   House,
+  MonitorDot,
+  Stethoscope,
+  Syringe,
   Waves,
   type LucideIcon,
 } from "lucide-react";
@@ -42,6 +50,15 @@ function LungsIcon(props: ComponentProps<"svg">) {
 }
 
 const SERVICE_ICONS: Record<ServiceIconName, LucideIcon | typeof LungsIcon> = {
+  doctor: Stethoscope,
+  orthopedic: Bone,
+  nursing: Syringe,
+  lab: FlaskConical,
+  physio: Dumbbell,
+  icu: MonitorDot,
+  equipment: BedSingle,
+  companion: HeartHandshake,
+  ambulance: Ambulance,
   home: House,
   chest: LungsIcon,
   bone: Bone,

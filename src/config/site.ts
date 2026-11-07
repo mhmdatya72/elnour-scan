@@ -36,6 +36,10 @@ export type SiteConfig = {
   address: { street: string; district: string; postalCode: string; mapUrl: string };
   openingHours: OpeningHours[];
   email: string;
+  /** التراخيص المؤكدة بنصها، مثل رقم الترخيص والجهة. تظهر في «عن المركز» لو اتملت */
+  licenses: string[];
+  /** الفريق الطبي المؤكد. يظهر في «عن المركز» لو اتملى */
+  team: { name: string; title: string }[];
   social: { facebook: string; instagram: string; tiktok: string; youtube: string };
   analytics: { googleAnalyticsId: string };
   verification: { google: string };
@@ -44,14 +48,14 @@ export type SiteConfig = {
 
 export const siteConfig: SiteConfig = {
   name: {
-    ar: "النور سكان للأشعة",
+    ar: "النور سكان للرعاية الطبية المنزلية",
     arShort: "النور سكان",
     en: "EL Nour Scan",
-    alternates: ["El Nour Scan", "ELNour Scan", "النور سكان"],
+    alternates: ["El Nour Scan", "ELNour Scan", "النور سكان", "النور سكان للأشعة"],
   },
   tagline: "دقة التشخيص .. لراحتك أكثر",
   description:
-    "النور سكان (EL Nour Scan) مركز أشعة وتشخيص بيقدّم خدمات منزلية داخل الإسكندرية: أشعة عادية، إيكو ورسم قلب، سونار ودوبلر، ومناسبة لكبار السن وغير القادرين على الحركة.",
+    "النور سكان (EL Nour Scan) بيقدّم رعاية طبية منزلية متكاملة داخل الإسكندرية: أطباء، تمريض، أشعة وفحوصات، تحاليل، علاج طبيعي، عناية منزلية، مرافقة مسنين، أجهزة طبية ونقل مرضى.",
   city: { ar: "الإسكندرية", en: "Alexandria" },
 
   // ينتظر تأكيد صاحب المركز — لا تكتب نطاقًا غير مملوك للمركز.
@@ -63,7 +67,7 @@ export const siteConfig: SiteConfig = {
   ],
   whatsapp: {
     phone: "01043730396",
-    defaultMessage: "السلام عليكم، ممكن أستفسر عن خدمة الأشعة المنزلية داخل الإسكندرية؟",
+    defaultMessage: "السلام عليكم، ممكن أستفسر عن خدمات الرعاية المنزلية داخل الإسكندرية؟",
   },
 
   // —— حقول تنتظر التأكيد؛ تظهر تلقائيًا بعد تعبئتها ——
@@ -71,6 +75,8 @@ export const siteConfig: SiteConfig = {
   address: { street: "", district: "", postalCode: "", mapUrl: "" },
   openingHours: [],
   email: "",
+  licenses: [],
+  team: [],
   social: { facebook: "", instagram: "", tiktok: "", youtube: "" },
   analytics: { googleAnalyticsId: "" },
   verification: { google: "" },
@@ -80,8 +86,8 @@ export const siteConfig: SiteConfig = {
 };
 
 export const navLinks = [
-  { href: "/", label: "الرئيسية" },
   { href: "/services", label: "الخدمات" },
+  { href: "/programs", label: "برامج الرعاية" },
   { href: "/areas", label: "المناطق" },
   { href: "/about", label: "عن المركز" },
   { href: "/contact", label: "تواصل معنا" },

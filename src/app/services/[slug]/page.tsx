@@ -1,6 +1,7 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { TriangleAlert } from "lucide-react";
-import { CallButton, WhatsAppButton } from "@/components/ContactButtons";
+import { buttonClass, CallButton, WhatsAppButton } from "@/components/ContactButtons";
 import { ContactCta } from "@/components/ContactCta";
 import { FaqList } from "@/components/FaqList";
 import { JsonLd } from "@/components/JsonLd";
@@ -37,6 +38,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
 
   const path = servicePath(service.slug);
   const message = serviceWhatsappMessage(service.name);
+  const requestHref = `/request?service=${service.slug}`;
   const related = service.related
     .map(getService)
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
@@ -54,7 +56,10 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
           { label: service.name, href: path },
         ]}
       >
-        <CallButton />
+        <Link href={requestHref} className={buttonClass("navy")}>
+          اطلب الخدمة
+        </Link>
+        <CallButton variant="outline" />
         <WhatsAppButton message={message} />
       </PageHeader>
 
@@ -84,11 +89,11 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
           <section className="rounded-2xl border-s-4 border-gold bg-sand p-5">
             <h2 className="flex items-center gap-2 text-xl font-bold">
               <TriangleAlert aria-hidden className="size-5 text-gold-deep" />
-              التحضير والسلامة
+              {service.preparationNote ? "السلامة" : "التحضير والسلامة"}
             </h2>
             <p className="mt-2">
-              التحضير بيختلف حسب الفحص، فاتأكد من المركز أو طبيبك قبل الموعد، وما توقفش أي دواء من غير
-              تعليمات الطبيب.
+              {service.preparationNote ??
+                "التحضير بيختلف حسب الفحص، فاتأكد من المركز أو طبيبك قبل الموعد، وما توقفش أي دواء من غير تعليمات الطبيب."}
             </p>
             {service.safetyNote ? <p className="mt-2">{service.safetyNote}</p> : null}
             <p className="mt-2">
@@ -111,10 +116,13 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
             </span>
             <p className="mt-4 text-xl font-bold">استفسر عن {service.name}</p>
             <p className="mt-2 text-base text-cream/90">
-              اذكر منطقتك وحالة حركة المريض. التواصل استفسار، والموعد بيتأكد بالاتفاق مع المركز.
+              اذكر منطقتك وحالة المريض. الطلب استفسار، والموعد بيتأكد بالاتفاق مع المركز.
             </p>
             <div className="mt-5 flex flex-col gap-3">
-              <CallButton variant="gold" />
+              <Link href={requestHref} className={buttonClass("gold")}>
+                اطلب الخدمة
+              </Link>
+              <CallButton variant="outlineLight" />
               <WhatsAppButton variant="outlineLight" message={message} />
             </div>
           </div>

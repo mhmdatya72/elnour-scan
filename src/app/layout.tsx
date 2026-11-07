@@ -21,13 +21,13 @@ const body = IBM_Plex_Sans_Arabic({
   weight: ["400", "500", "700"],
 });
 
-const homeTitle = `${siteConfig.name.ar} | أشعة منزلية في ${siteConfig.city.ar}`;
+const homeTitle = `${siteConfig.name.arShort} | رعاية طبية منزلية في ${siteConfig.city.ar}`;
 
 export const metadata: Metadata = {
   metadataBase,
   applicationName: siteConfig.name.ar,
   ...pageMetadata({ title: homeTitle, description: siteConfig.description, path: "/" }),
-  title: { default: homeTitle, template: `%s | ${siteConfig.name.ar}` },
+  title: { default: homeTitle, template: `%s | ${siteConfig.name.arShort}` },
   ...(siteConfig.verification.google
     ? { verification: { google: siteConfig.verification.google } }
     : {}),

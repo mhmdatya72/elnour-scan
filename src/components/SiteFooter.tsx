@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { MapPin } from "lucide-react";
 import { navLinks, siteConfig } from "@/config/site";
-import { services, servicePath } from "@/config/services";
+import { categories } from "@/config/care";
 import { PhoneNumber } from "@/components/ContactButtons";
 import { Logo } from "@/components/Logo";
 import { PulseLine, WhatsAppIcon } from "@/components/icons";
@@ -40,7 +40,7 @@ export function SiteFooter() {
             <p className="mt-4 text-cream/85">{siteConfig.tagline}</p>
             <p className="mt-2 inline-flex items-center gap-1.5 text-cream/85">
               <MapPin aria-hidden className="size-4 text-gold" />
-              خدمات منزلية داخل {siteConfig.city.ar}
+              رعاية طبية منزلية داخل {siteConfig.city.ar}
             </p>
           </div>
 
@@ -55,6 +55,11 @@ export function SiteFooter() {
                 </li>
               ))}
               <li>
+                <Link href="/request" className="font-bold text-gold hover:underline">
+                  اطلب خدمة
+                </Link>
+              </li>
+              <li>
                 <Link href="/privacy" className="hover:underline">
                   سياسة الخصوصية
                 </Link>
@@ -65,10 +70,10 @@ export function SiteFooter() {
           <nav aria-label="روابط الخدمات">
             <h2 className="text-lg font-bold text-gold">الخدمات</h2>
             <ul className="mt-3 space-y-1.5">
-              {services.map((service) => (
-                <li key={service.slug}>
-                  <Link href={servicePath(service.slug)} className="hover:underline">
-                    {service.name}
+              {categories.map((category) => (
+                <li key={category.key}>
+                  <Link href={`/services#${category.key}`} className="hover:underline">
+                    {category.title}
                   </Link>
                 </li>
               ))}

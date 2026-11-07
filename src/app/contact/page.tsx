@@ -11,7 +11,7 @@ import { hasAddress, pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "تواصل معنا",
-  description: `تواصل مع النور سكان للاستفسار عن الأشعة والفحوصات المنزلية في الإسكندرية. اتصل على ${siteConfig.phones
+  description: `تواصل مع النور سكان للاستفسار عن الرعاية الطبية المنزلية في الإسكندرية. اتصل على ${siteConfig.phones
     .map((phone) => phone.local)
     .join(" أو ")}، أو ابعت رسالة واتساب.`,
   path: "/contact",
@@ -26,7 +26,7 @@ export default function ContactPage() {
     <>
       <PageHeader
         title="تواصل مع النور سكان"
-        intro="الأسرع إنك تتصل أو تبعت واتساب. اذكر الفحص المطلوب ومنطقتك داخل الإسكندرية عشان المركز يرد على استفسارك."
+        intro="الأسرع إنك تتصل أو تبعت واتساب. اذكر الخدمة المطلوبة ومنطقتك داخل الإسكندرية عشان المركز يرد على استفسارك."
         crumbs={[{ label: "تواصل معنا", href: "/contact" }]}
       />
 

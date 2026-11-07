@@ -9,7 +9,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "عن المركز",
   description:
-    "تعرّف على النور سكان (EL Nour Scan)، مركز أشعة وتشخيص بيقدّم خدمات منزلية داخل الإسكندرية، ومناسبة لكبار السن وغير القادرين على الحركة.",
+    "تعرّف على النور سكان (EL Nour Scan): رعاية طبية منزلية متكاملة داخل الإسكندرية، بدأت بالأشعة والتشخيص، ومناسبة لكبار السن وغير القادرين على الحركة.",
   path: "/about",
 });
 
@@ -18,7 +18,7 @@ export default function AboutPage() {
     <>
       <PageHeader
         title={`عن ${siteConfig.name.ar}`}
-        intro={`${siteConfig.name.ar} مركز أشعة وتشخيص بيقدّم خدمات منزلية داخل ${siteConfig.city.ar}، تحت شعار «${siteConfig.tagline}».`}
+        intro={`${siteConfig.name.arShort} بيقدّم رعاية طبية منزلية متكاملة داخل ${siteConfig.city.ar}، منها الأشعة والتشخيص، تحت شعار «${siteConfig.tagline}».`}
         crumbs={[{ label: "عن المركز", href: "/about" }]}
       />
 
@@ -26,8 +26,8 @@ export default function AboutPage() {
         <section>
           <h2 className="text-2xl font-extrabold sm:text-3xl">فكرة الخدمة</h2>
           <p className="mt-3 text-lg text-navy/90">
-            الفكرة ببساطة: «الأشعة لحد باب بيتك». الخدمة المنزلية موجهة للي صعب عليهم مشوار المركز، زي
-            كبار السن وغير القادرين على الحركة، وكمان لأسرهم اللي بتنظم الفحص المطلوب.
+            الفكرة ببساطة: الرعاية الطبية تيجي لحد باب البيت. الخدمة موجهة للي صعب عليهم المشوار، زي كبار
+            السن وغير القادرين على الحركة، وكمان لأسرهم اللي بتنظم الرعاية المطلوبة.
           </p>
           <h2 className="mt-9 text-2xl font-extrabold sm:text-3xl">الخدمات اللي بنقدمها</h2>
           <ul className="mt-3 flex flex-wrap gap-2">
