@@ -1,0 +1,17 @@
+# إعدادات Apache/LiteSpeed للنسخة الثابتة على Hostinger. Vercel بيتجاهل الملف ده.
+# لتحويل كل الزيارات لـ https: فعّل "Force HTTPS" من لوحة Hostinger بعد ما الشهادة تشتغل.
+
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+# ملفات _next ليها أسماء بتتغير مع كل بناء، فينفع تتخزن سنة
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css|woff2|png|jpg|jpeg|svg|webp)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

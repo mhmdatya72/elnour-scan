@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Alexandria, IBM_Plex_Sans_Arabic } from "next/font/google";
 import Script from "next/script";
+import { DemoBanner } from "@/components/Demo";
 import { JsonLd } from "@/components/JsonLd";
+import { DEMO_MODE } from "@/config/demo";
 import { MobileContactBar } from "@/components/MobileContactBar";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -28,6 +30,8 @@ export const metadata: Metadata = {
   applicationName: siteConfig.name.ar,
   ...pageMetadata({ title: homeTitle, description: siteConfig.description, path: "/" }),
   title: { default: homeTitle, template: `%s | ${siteConfig.name.arShort}` },
+  // نسخة الديمو ما تتفهرسش عشان بياناتها التجريبية ما تظهرش في نتائج البحث
+  ...(DEMO_MODE ? { robots: { index: false, follow: false } } : {}),
   ...(siteConfig.verification.google
     ? { verification: { google: siteConfig.verification.google } }
     : {}),
@@ -48,6 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           انتقل إلى المحتوى
         </a>
         <JsonLd data={medicalBusinessSchema()} />
+        <DemoBanner />
         <SiteHeader />
         <main id="main" tabIndex={-1} className="focus:outline-none">
           {children}

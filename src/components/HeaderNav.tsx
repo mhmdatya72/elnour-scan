@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import { Menu, X } from "lucide-react";
-import { navLinks } from "@/config/site";
+import { moreLinks, navLinks } from "@/config/nav";
 
 function isCurrent(pathname: string, href: string): boolean {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
@@ -28,7 +28,7 @@ export function HeaderNav({ actions }: { actions: ReactNode }) {
   return (
     <>
       <nav aria-label="القائمة الرئيسية" className="hidden lg:block">
-        <ul className="flex items-center gap-1">
+        <ul className="flex items-center gap-0.5 xl:gap-1">
           {navLinks.map((link) => {
             const current = isCurrent(pathname, link.href);
             return (
@@ -36,7 +36,7 @@ export function HeaderNav({ actions }: { actions: ReactNode }) {
                 <Link
                   href={link.href}
                   aria-current={current ? "page" : undefined}
-                  className={`rounded-full px-4 py-2 font-medium transition-colors hover:bg-sand ${
+                  className={`rounded-full px-3 py-2 font-medium whitespace-nowrap transition-colors hover:bg-sand xl:px-4 ${
                     current ? "bg-sand font-bold" : ""
                   }`}
                 >
@@ -65,15 +65,15 @@ export function HeaderNav({ actions }: { actions: ReactNode }) {
         <nav
           id="mobile-menu"
           aria-label="قائمة الموبايل"
-          className="absolute inset-x-0 top-full z-40 border-b border-navy/10 bg-cream px-4 pb-6 shadow-lg lg:hidden"
+          className="absolute inset-x-0 top-full z-40 max-h-[75svh] overflow-y-auto border-b border-navy/10 bg-cream px-4 pb-6 shadow-lg lg:hidden"
         >
           <ul>
-            {navLinks.map((link) => (
+            {[...navLinks, ...moreLinks].map((link) => (
               <li key={link.href} className="border-b border-navy/10">
                 <Link
                   href={link.href}
                   aria-current={isCurrent(pathname, link.href) ? "page" : undefined}
-                  className="block py-3.5 text-lg font-medium aria-[current=page]:font-bold"
+                  className="block py-3 text-lg font-medium aria-[current=page]:font-bold"
                 >
                   {link.label}
                 </Link>

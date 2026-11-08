@@ -1,12 +1,18 @@
 import type { ReactNode } from "react";
+import { DemoTag } from "@/components/Demo";
+import { DEMO_MODE, display } from "@/config/demo";
 import { siteConfig } from "@/config/site";
 import { PhoneNumber } from "@/components/ContactButtons";
 import { telHref } from "@/lib/contact";
-import { hasAddress } from "@/lib/seo";
 
-/** بطاقة حقائق المركز. الحقول الفارغة في الإعدادات لا تُعرض */
+/** بطاقة حقائق المركز. الحقول الفارغة لا تُعرض، وقيم الديمو عليها علامة */
 export function CenterFacts() {
-  const { name, tagline, city, phones, address, openingHours, email, areas } = siteConfig;
+  const { name, tagline, city, phones, email } = siteConfig;
+  const { address, openingHours, areas, licenses } = display;
+  const demoAddress = DEMO_MODE && !siteConfig.address.street;
+  const demoHours = DEMO_MODE && siteConfig.openingHours.length === 0;
+  const demoLicenses = DEMO_MODE && siteConfig.licenses.length === 0;
+
   const rows: { label: string; value: ReactNode }[] = [
     {
       label: "الاسم",
@@ -34,20 +40,14 @@ export function CenterFacts() {
     },
   ];
 
-  if (siteConfig.licenses.length > 0) {
-    rows.push({ label: "التراخيص", value: siteConfig.licenses.join(" · ") });
+  if (licenses.length > 0) {
+    rows.push({ label: "التراخيص", value: <>{licenses.join(" · ")} {demoLicenses ? <DemoTag /> : null}</> });
   }
-  if (siteConfig.team.length > 0) {
-    rows.push({
-      label: "الفريق",
-      value: siteConfig.team.map((member) => `${member.name} (${member.title})`).join(" · "),
-    });
-  }
-  if (areas.length > 0) rows.push({ label: "المناطق", value: areas.join("، ") });
-  if (hasAddress()) {
+  if (areas.length > 0 && !display.isDemoAreas) rows.push({ label: "المناطق", value: areas.join("، ") });
+  if (address.street) {
     rows.push({
       label: "العنوان",
-      value: [address.street, address.district, city.ar].filter(Boolean).join("، "),
+      value: <>{[address.street, address.district, city.ar].filter(Boolean).join("، ")} {demoAddress ? <DemoTag /> : null}</>,
     });
   }
   if (address.mapUrl) {
@@ -55,13 +55,13 @@ export function CenterFacts() {
       label: "الخريطة",
       value: (
         <a href={address.mapUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">
-          افتح الموقع على الخريطة
+          افتح على الخريطة
         </a>
       ),
     });
   }
   if (openingHours.length > 0) {
-    rows.push({ label: "ساعات العمل", value: openingHours.map((h) => h.label).join(" · ") });
+    rows.push({ label: "ساعات العمل", value: <>{openingHours.map((h) => h.label).join(" · ")} {demoHours ? <DemoTag /> : null}</> });
   }
   if (email) {
     rows.push({

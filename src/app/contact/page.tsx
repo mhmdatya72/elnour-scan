@@ -6,8 +6,9 @@ import { WhatsAppIcon } from "@/components/icons";
 import { services } from "@/config/services";
 import { siteConfig } from "@/config/site";
 import { telHref, whatsappHref } from "@/lib/contact";
+import { display } from "@/config/demo";
 import { UNSURE_SERVICE } from "@/lib/inquiry";
-import { hasAddress, pageMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "تواصل معنا",
@@ -60,22 +61,32 @@ export default function ContactPage() {
             </div>
           ))}
 
-          {hasAddress() ? (
+          {display.address.street ? (
             <div>
               <h3 className="font-bold">العنوان</h3>
               <p>
-                {[siteConfig.address.street, siteConfig.address.district, siteConfig.city.ar]
+                {[display.address.street, display.address.district, siteConfig.city.ar]
                   .filter(Boolean)
                   .join("، ")}
               </p>
+              {display.address.mapUrl ? (
+                <a
+                  href={display.address.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-10 items-center font-bold underline underline-offset-4"
+                >
+                  افتح على الخريطة
+                </a>
+              ) : null}
             </div>
           ) : null}
-          {siteConfig.openingHours.length > 0 ? (
+          {display.openingHours.length > 0 ? (
             <div>
               <h3 className="font-bold">ساعات العمل</h3>
               <ul>
-                {siteConfig.openingHours.map((hours) => (
-                  <li key={hours.schema}>{hours.label}</li>
+                {display.openingHours.map((hours) => (
+                  <li key={hours.label}>{hours.label}</li>
                 ))}
               </ul>
             </div>

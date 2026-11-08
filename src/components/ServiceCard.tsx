@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { DemoTag } from "@/components/Demo";
 import { ServiceIcon } from "@/components/icons";
 import { servicePath, type Service } from "@/config/services";
 
@@ -28,6 +29,11 @@ export function ServiceCard({
         <ServiceIcon name={service.icon} className="size-6 sm:size-7" />
       </span>
       <div className="flex flex-1 flex-col">
+        {service.demo ? (
+          <span className={compact ? "sm:mt-3" : "mt-3"}>
+            <DemoTag />
+          </span>
+        ) : null}
         <Heading className={`font-bold ${compact ? "text-lg sm:mt-5 sm:text-xl" : "mt-5 text-xl"}`}>
           <Link
             href={servicePath(service.slug)}

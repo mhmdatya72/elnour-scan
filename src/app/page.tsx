@@ -7,6 +7,8 @@ import { ContactCta } from "@/components/ContactCta";
 import { FaqList } from "@/components/FaqList";
 import { JsonLd } from "@/components/JsonLd";
 import { XrayModel3D } from "@/components/XrayModel3D";
+import { HomeArticles, HomePricingApp, HomeReviews, HomeStats, HomeTrust } from "@/components/DemoSections";
+import { DEMO_MODE } from "@/config/demo";
 import { ServiceIcon } from "@/components/icons";
 import { carePrograms, categories } from "@/config/care";
 import { homeFaqs } from "@/config/faqs";
@@ -129,7 +131,9 @@ export default function HomePage() {
         </ul>
       </section>
 
-      <section aria-labelledby="steps-heading" className="bg-sand">
+      {DEMO_MODE ? <HomeStats /> : null}
+
+      <section aria-labelledby="steps-heading" className={`bg-sand ${DEMO_MODE ? "mt-12" : ""}`}>
         <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
           <h2 id="steps-heading" className="text-3xl font-extrabold sm:text-4xl">
             بتمشي إزاي؟
@@ -183,7 +187,9 @@ export default function HomePage() {
         </ul>
       </section>
 
-      <section aria-labelledby="safety-heading" className="mx-auto max-w-6xl px-4 pb-4 sm:px-6">
+      {DEMO_MODE ? <HomeTrust /> : null}
+
+      <section aria-labelledby="safety-heading" className={`mx-auto max-w-6xl px-4 pb-4 sm:px-6 ${DEMO_MODE ? "pt-12" : ""}`}>
         <h2 id="safety-heading" className="text-3xl font-extrabold sm:text-4xl">
           البيت ولا المستشفى؟
         </h2>
@@ -221,6 +227,14 @@ export default function HomePage() {
       </section>
 
       <XrayModel3D />
+
+      {DEMO_MODE ? (
+        <>
+          <HomeReviews />
+          <HomePricingApp />
+          <HomeArticles />
+        </>
+      ) : null}
 
       <section aria-labelledby="areas-heading" className="mx-auto max-w-6xl px-4 pt-12 sm:px-6">
         <div className="grid gap-5 rounded-3xl bg-sand p-6 sm:p-9 md:grid-cols-[1fr_auto] md:items-center">

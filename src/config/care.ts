@@ -1,4 +1,5 @@
-import type { ServiceIconName } from "@/config/services";
+import { DEMO_MODE } from "@/config/demo";
+import { getService, type ServiceIconName } from "@/config/services";
 
 /**
  * تنظيم الخدمات حسب احتياج الزائر: الأقسام، برامج الرعاية، والخدمات القادمة.
@@ -14,14 +15,14 @@ export type Category = {
   slugs: string[];
 };
 
-export const categories: Category[] = [
+const allCategories: Category[] = [
   {
     key: "doctors",
     title: "الأطباء",
     need: "محتاج دكتور",
     description: "كشف في البيت، ومنهم دكاترة العظام",
     icon: "doctor",
-    slugs: ["home-doctor", "orthopedic-doctor"],
+    slugs: ["home-doctor", "orthopedic-doctor", "home-assessment", "teleconsultation"],
   },
   {
     key: "nursing",
@@ -29,7 +30,7 @@ export const categories: Category[] = [
     need: "محتاج تمريض",
     description: "حقن ومحاليل وجروح ومتابعة",
     icon: "nursing",
-    slugs: ["home-nursing"],
+    slugs: ["home-nursing", "wound-care", "diabetic-foot", "respiratory-care", "feeding-tube-care"],
   },
   {
     key: "imaging",
@@ -46,6 +47,8 @@ export const categories: Category[] = [
       "ecg",
       "ultrasound",
       "doppler",
+      "eeg-nerve-studies",
+      "sleep-study",
     ],
   },
   {
@@ -62,7 +65,7 @@ export const categories: Category[] = [
     need: "علاج طبيعي",
     description: "جلسات وتأهيل في البيت",
     icon: "physio",
-    slugs: ["physiotherapy"],
+    slugs: ["physiotherapy", "nutrition-therapy"],
   },
   {
     key: "critical",
@@ -70,7 +73,7 @@ export const categories: Category[] = [
     need: "رعاية حالة حرجة",
     description: "عناية منزلية بعد تقييم الطبيب",
     icon: "icu",
-    slugs: ["home-icu"],
+    slugs: ["home-icu", "home-dialysis", "palliative-care"],
   },
   {
     key: "support",
@@ -78,9 +81,30 @@ export const categories: Category[] = [
     need: "مرافق أو جهاز أو نقل",
     description: "مرافق مسنين، أجهزة طبية، ونقل مرضى",
     icon: "companion",
-    slugs: ["elderly-companion", "medical-equipment", "ambulance-transfer"],
+    slugs: ["elderly-companion", "dementia-care", "medical-equipment", "ambulance-transfer", "medicine-delivery"],
+  },
+  {
+    key: "family",
+    title: "الأم والطفل",
+    need: "رعاية الأم أو المولود",
+    description: "بعد الولادة، المواليد، والتطعيمات",
+    icon: "baby",
+    slugs: ["postnatal-nursing", "newborn-care", "newborn-jaundice", "home-vaccination", "fetal-monitoring"],
+  },
+  {
+    key: "remote",
+    title: "المتابعة عن بُعد",
+    need: "متابعة عن بُعد",
+    description: "استشارات فيديو وقياسات من البيت",
+    icon: "watch",
+    slugs: ["remote-monitoring", "teleconsultation"],
   },
 ];
+
+/** الأقسام فيها الخدمات المتاحة فعليًا بس، فخدمات الديمو بتختفي مع إيقافه */
+export const categories: Category[] = allCategories
+  .map((category) => ({ ...category, slugs: category.slugs.filter((slug) => getService(slug)) }))
+  .filter((category) => category.slugs.length > 0);
 
 export type CareProgram = {
   key: string;
@@ -140,7 +164,7 @@ export const carePrograms: CareProgram[] = [
  * خدمات مش متوفرة دلوقتي وبتظهر بعلامة «قريبًا».
  * احذف أي عنصر لو مش مخطط له، ولما يتوفر انقله لخدمة في care-services.ts.
  */
-export const comingSoon: { title: string; description: string }[] = [
+export const comingSoon: { title: string; description: string }[] = DEMO_MODE ? [] : [
   { title: "غسيل كلوي منزلي", description: "جلسات الغسيل في البيت للحالات المناسبة" },
   { title: "رسم مخ وتخطيط أعصاب", description: "فحوصات الأعصاب والعضلات في البيت" },
   { title: "تطعيمات منزلية", description: "تطعيمات في البيت حسب إرشادات الطبيب" },

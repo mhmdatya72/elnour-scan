@@ -5,8 +5,28 @@
  */
 
 import { careServices } from "@/config/care-services";
+import { DEMO_MODE } from "@/config/demo";
+import { demoServices } from "@/config/demo-services";
 
 export type ServiceIconName =
+  | "assessment"
+  | "wound"
+  | "foot"
+  | "respiratory"
+  | "tube"
+  | "brain"
+  | "palliative"
+  | "nutrition"
+  | "kidney"
+  | "sleep"
+  | "mother"
+  | "baby"
+  | "sun"
+  | "vaccine"
+  | "fetal"
+  | "video"
+  | "watch"
+  | "pill"
   | "doctor"
   | "orthopedic"
   | "nursing"
@@ -47,6 +67,8 @@ export type Service = {
   safetyNote?: string;
   /** بديل نص التحضير العام للفحوصات، للخدمات اللي مش فحص */
   preparationNote?: string;
+  /** خدمة ديمو: بتظهر بعلامة «تجريبي» وبتختفي مع إيقاف وضع الديمو */
+  demo?: boolean;
   faqs: Faq[];
   related: string[];
 };
@@ -485,7 +507,11 @@ const imagingServices: Service[] = [
   },
 ];
 
-export const services: Service[] = [...careServices, ...imagingServices];
+export const services: Service[] = [
+  ...careServices,
+  ...imagingServices,
+  ...(DEMO_MODE ? demoServices : []),
+];
 
 export function getService(slug: string): Service | undefined {
   return services.find((service) => service.slug === slug);

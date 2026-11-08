@@ -84,11 +84,3 @@ export const siteConfig: SiteConfig = {
   // رقم الإسعاف العام في مصر، يُذكر كتنبيه للحالات الطارئة.
   ambulanceNumber: "123",
 };
-
-export const navLinks = [
-  { href: "/services", label: "الخدمات" },
-  { href: "/programs", label: "برامج الرعاية" },
-  { href: "/areas", label: "المناطق" },
-  { href: "/about", label: "عن المركز" },
-  { href: "/contact", label: "تواصل معنا" },
-] as const;

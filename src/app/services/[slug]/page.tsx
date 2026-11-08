@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { TriangleAlert } from "lucide-react";
 import { buttonClass, CallButton, WhatsAppButton } from "@/components/ContactButtons";
 import { ContactCta } from "@/components/ContactCta";
+import { DemoNote } from "@/components/Demo";
 import { FaqList } from "@/components/FaqList";
 import { JsonLd } from "@/components/JsonLd";
 import { PageHeader } from "@/components/PageHeader";
@@ -45,8 +46,12 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
 
   return (
     <>
-      <JsonLd data={serviceSchema({ name: service.name, description: service.metaDescription, path })} />
-      <JsonLd data={faqSchema(service.faqs)} />
+      {service.demo ? null : (
+        <>
+          <JsonLd data={serviceSchema({ name: service.name, description: service.metaDescription, path })} />
+          <JsonLd data={faqSchema(service.faqs)} />
+        </>
+      )}
 
       <PageHeader
         title={service.h1}
@@ -65,6 +70,9 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
 
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1fr_20rem]">
         <div className="max-w-3xl space-y-9">
+          {service.demo ? (
+            <DemoNote>الخدمة دي مثال تجريبي ولسه مش مؤكد توفرها. اتأكد من المركز قبل الاعتماد عليها.</DemoNote>
+          ) : null}
           {service.sections.map((section) => (
             <section key={section.title}>
               <h2 className="text-2xl font-extrabold">{section.title}</h2>

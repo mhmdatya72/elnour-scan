@@ -1,4 +1,6 @@
+import { AreaChecker } from "@/components/AreaChecker";
 import { AreasNotice } from "@/components/AreasNotice";
+import { display } from "@/config/demo";
 import { CallButton, WhatsAppButton } from "@/components/ContactButtons";
 import { ContactCta } from "@/components/ContactCta";
 import { PageHeader } from "@/components/PageHeader";
@@ -29,10 +31,14 @@ export default function AreasPage() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-2">
         <section>
           <h2 className="text-2xl font-extrabold sm:text-3xl">
-            {siteConfig.areas.length > 0 ? "المناطق المؤكدة" : "هل منطقتك ضمن الخدمة؟"}
+            هل منطقتك ضمن الخدمة؟
           </h2>
           <div className="mt-4">
-            <AreasNotice />
+            {display.areas.length > 0 ? (
+              <AreaChecker areas={display.areas} isDemo={display.isDemoAreas} />
+            ) : (
+              <AreasNotice />
+            )}
           </div>
         </section>
         <section>

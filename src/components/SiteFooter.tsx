@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { MapPin } from "lucide-react";
-import { navLinks, siteConfig } from "@/config/site";
+import { display } from "@/config/demo";
+import { moreLinks, navLinks } from "@/config/nav";
+import { siteConfig } from "@/config/site";
 import { categories } from "@/config/care";
 import { PhoneNumber } from "@/components/ContactButtons";
 import { Logo } from "@/components/Logo";
 import { PulseLine, WhatsAppIcon } from "@/components/icons";
 import { telHref, whatsappHref } from "@/lib/contact";
-import { hasAddress } from "@/lib/seo";
 
 const SOCIAL_LABELS: Record<keyof typeof siteConfig.social, string> = {
   facebook: "فيسبوك",
@@ -47,7 +48,7 @@ export function SiteFooter() {
           <nav aria-label="روابط الموقع">
             <h2 className="text-lg font-bold text-gold">الصفحات</h2>
             <ul className="mt-3 space-y-1.5">
-              {navLinks.map((link) => (
+              {[...navLinks, ...moreLinks].map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="hover:underline">
                     {link.label}
@@ -102,15 +103,15 @@ export function SiteFooter() {
                   ) : null}
                 </li>
               ))}
-              {hasAddress() ? (
+              {display.address.street ? (
                 <li>
-                  {[siteConfig.address.street, siteConfig.address.district, siteConfig.city.ar]
+                  {[display.address.street, display.address.district, siteConfig.city.ar]
                     .filter(Boolean)
                     .join("، ")}
                 </li>
               ) : null}
-              {siteConfig.openingHours.map((hours) => (
-                <li key={hours.schema}>{hours.label}</li>
+              {display.openingHours.map((hours) => (
+                <li key={hours.label}>{hours.label}</li>
               ))}
               {siteConfig.email ? (
                 <li>

@@ -2,9 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 
-const LOGO_WIDTH = 950;
-// النسخة دي من غير سطر «Radiology & Diagnostic Center»، لأن الخدمات بقت أوسع من الأشعة
-const LOGO_HEIGHT = 510;
+// النسخة دي من غير سطر «Radiology & Diagnostic Center»، لأن الخدمات بقت أوسع من الأشعة.
+// مصغّرة لعرض 480 (ضعف أكبر مقاس معروض)، لأن النسخة الثابتة على Hostinger ما بتصغّرش الصور.
+const LOGO_WIDTH = 480;
+const LOGO_HEIGHT = 258;
 
 /**
  * surface: ألوان اللوجو معمولة للخلفيات الفاتحة والكحلي بيختفي على التذييل،
@@ -17,7 +18,7 @@ export function Logo({ surface = false, preload = false }: { surface?: boolean; 
       className={`inline-block shrink-0 ${surface ? "rounded-2xl bg-cream p-3" : ""}`}
     >
       <Image
-        src="/brand/logo-name.png"
+        src="/brand/logo-name-480.webp"
         alt={`${siteConfig.name.ar} (${siteConfig.name.en}): الصفحة الرئيسية`}
         width={LOGO_WIDTH}
         height={LOGO_HEIGHT}
